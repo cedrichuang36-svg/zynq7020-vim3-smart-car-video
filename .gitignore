@@ -1,0 +1,6 @@
+segments/
+__pycache__/
+*.pyc
+*.log
+.DS_Store
+source/*.mp4
