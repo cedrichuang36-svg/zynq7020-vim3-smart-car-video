@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>比赛视频改造分镜表</title>
+<style>
+  :root{
+    --ink:#1b1d21; --gray:#6b7280; --line:#e5e7eb; --bg:#f6f7f9;
+    --red:#c0392b; --blue:#1f4e79; --soft:#fff;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:"Microsoft YaHei","PingFang SC","Noto Sans SC",Arial,sans-serif;
+    line-height:1.65;}
+  .page{max-width:1080px;margin:0 auto;padding:40px 28px 56px;}
+  .kicker{font-size:12px;letter-spacing:.18em;color:var(--red);font-weight:700;}
+  h1{font-size:30px;line-height:1.3;margin:8px 0 10px;letter-spacing:-.01em;}
+  .lead{font-size:15px;color:var(--gray);max-width:860px;margin:0 0 26px;}
+  h2{font-size:19px;margin:34px 0 12px;padding-left:10px;border-left:4px solid var(--red);}
+  p{font-size:14px;margin:8px 0;}
+  .cards{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:18px 0 6px;}
+  .card{background:var(--soft);border:1px solid var(--line);border-radius:10px;padding:16px 18px;}
+  .card h3{font-size:14px;margin:0 0 8px;color:var(--blue);}
+  .card p{font-size:13px;color:#374151;margin:0;}
+  .num{font-size:22px;font-weight:700;color:var(--ink);}
+  .bad{color:var(--red);font-weight:700;}
+  .good{color:#1f7a56;font-weight:700;}
+  table{width:100%;border-collapse:collapse;background:var(--soft);
+    border:1px solid var(--line);border-radius:8px;overflow:hidden;margin:12px 0 22px;}
+  th,td{padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top;
+    font-size:12.5px;text-align:left;}
+  th{background:#fafafa;color:#374151;font-weight:700;white-space:nowrap;}
+  tr:last-child td{border-bottom:none;}
+  td.t{white-space:nowrap;font-variant-numeric:tabular-nums;color:var(--blue);font-weight:700;}
+  .tag{display:inline-block;font-size:11px;padding:1px 7px;border-radius:99px;
+    background:#f1f5f9;color:#475569;margin-right:4px;white-space:nowrap;}
+  .tag.red{background:#fdecea;color:#a93226;}
+  .tag.green{background:#e8f5ef;color:#1f7a56;}
+  .note{background:#fff8e8;border:1px solid #f0dfb8;border-radius:8px;padding:12px 14px;
+    font-size:13px;margin:14px 0;}
+  .checklist{display:grid;grid-template-columns:1fr 1fr;gap:6px 18px;margin:10px 0;}
+  .checklist div{font-size:13px;background:#fff;border:1px solid var(--line);
+    border-radius:6px;padding:7px 10px;}
+  .checklist div::before{content:"□";color:var(--red);margin-right:7px;font-weight:700;}
+  ul{margin:8px 0 8px 20px;padding:0;font-size:13.5px;}
+  li{margin:4px 0;}
+  .small{font-size:12px;color:var(--gray);}
+  .footer{margin-top:34px;padding-top:14px;border-top:1px solid var(--line);
+    font-size:12px;color:var(--gray);}
+  @media(max-width:760px){
+    .cards,.checklist{grid-template-columns:1fr}
+    h1{font-size:24px}.page{padding:28px 16px 40px}
+    table{display:block;overflow-x:auto}
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="kicker">VIDEO REBUILD PLAN / 2026-10-30</div>
+  <h1>你的 33 秒素材，要按模板改成 1 分 42 秒</h1>
+  <p class="lead">
+    模板不是“拍得好看”，而是把评委要看的东西按顺序摆出来：作品名 → 作品介绍 → 分块介绍 →
+    连续实拍 → END。你现在只有连续实拍，而且画幅不对。下面的时间轴按模板 1:42 对齐，可直接当补拍与剪辑清单。
+  </p>
+
+  <div class="cards">
+    <div class="card">
+      <h3>模板《体感式三轴云台》</h3>
+      <p><span class="num">1:42</span> · 横屏 · 640×432<br>
+      开头 9 s 标题 + 3 张章节卡 + 4 个分块 + 约 66 s 连续演示 + END。<br>
+      无口播，靠字幕卡与现场声，底部有“不能出现学校/指导老师”的审核提示。</p>
+    </div>
+    <div class="card">
+      <h3>你的《实验视频》</h3>
+      <p><span class="num">0:33</span> · <span class="bad">竖屏 720×1264</span><br>
+      两段地面俯拍：红外避障 + 超声跟随；画面里有旧车、地面杂物、桌面脚；<br>
+      没有标题卡、没有分块介绍、没有新 FPGA 板、没有 END。</p>
+    </div>
+  </div>
+
+  <div class="note">
+    <b>先明确一件事：</b>模板里那行“上传的视频中不能包含学校、指导老师等信息”是硬性合规提示，不是让你照抄的字幕。
+    学生姓名可以出现（模板开头和 END 都有），学校名称、校徽、指导老师姓名、实验室门牌都不能出现；PCB 丝印、衣服、背景里的校名也要避开或遮掉。
+  </div>
+
+  <h2>一、按模板对齐的新时间轴</h2>
+  <table>
+    <thead><tr><th>时间</th><th>段落</th><th>画面要求</th><th>字幕 / 旁白</th></tr></thead>
+    <tbody>
+      <tr><td class="t">0:00–0:06</td><td>标题卡</td><td>白底、黑字、红色细线；作品名 + 3 位成员姓名/队号，不出现学校与导师。</td><td>基于 AMD Artix-7 FPGA 与 STM32 的异构智能小车实时控制平台</td></tr>
+      <tr><td class="t">0:06–0:09</td><td>“作品介绍”章节卡</td><td>与模板同款：白底、左侧红色竖线、大号黑字。</td><td>作品介绍</td></tr>
+      <tr><td class="t">0:09–0:12</td><td>“分块介绍”章节卡</td><td>同上，节奏干脆，不要动画。</td><td>分块介绍</td></tr>
+      <tr><td class="t">0:12–0:15</td><td>分块 1：主控与自制板</td><td>俯拍 ACX750 + STM32F103 + 驱动板/转接板，手指出关键芯片；画面干净、打光均匀。</td><td>ACX750 · STM32F103 · 自制驱动/转接板</td></tr>
+      <tr><td class="t">0:15–0:18</td><td>分块 2：FPGA 实时层</td><td>板卡特写 + Vivado/ILA 屏幕（必须真实），能看到 PWM/编码器/急停相关信号。</td><td>PL：20 kHz PWM · 正交解码 · 硬件急停</td></tr>
+      <tr><td class="t">0:18–0:21</td><td>分块 3：STM32 策略层</td><td>串口终端/状态机输出 + 板卡；不要只拍屏幕，要带到实物。</td><td>PS/主控：状态机 · 速度闭环 · 串口命令</td></tr>
+      <tr><td class="t">0:21–0:24</td><td>分块 4：传感器与执行</td><td>五路循迹、红外、超声、编码器、四驱电机各 0.5–1 s 特写；能看清接线方向。</td><td>5 路循迹 · 红外 · 超声 · 编码器 · 四驱</td></tr>
+      <tr><td class="t">0:24–0:27</td><td>“视频展示”章节卡</td><td>同模板的章节卡，之后硬切实拍。</td><td>视频展示</td></tr>
+      <tr><td class="t">0:27–0:33</td><td>总览 + 放障碍</td><td>固定机位 45°，先给车 2 s 静态，再把手/障碍物放入画面，交代实验条件。</td><td>实验条件：<span class="tag">地面/赛道</span><span class="tag">障碍位置</span></td></tr>
+      <tr><td class="t">0:33–0:45</td><td>红外避障 ×3</td><td>同一机位重复三次；每次保留“接近—触发—停/转—驶离”完整动作；不要剪掉刹车瞬间。</td><td>第 1/2/3 次 · 红外触发 → PL 硬件急停</td></tr>
+      <tr><td class="t">0:45–0:57</td><td>超声跟随/测距</td><td>手或挡板从远处靠近，画面里放一把尺/地面刻度，能读出距离；再拍一次后退保持。</td><td>超声测距 · 中距离预判/跟随</td></tr>
+      <tr><td class="t">0:57–1:09</td><td>五路循迹/转弯</td><td>俯拍或 45°，车完整走一段直道 + 一个弯；不要追着车跑导致失焦。</td><td>5 路循迹 · 加权误差 · 差速转向</td></tr>
+      <tr><td class="t">1:09–1:21</td><td>调试证据</td><td>ILA 抓 PWM/编码器/急停时间戳，或示波器看 20 kHz PWM；屏幕要能看清标签。</td><td>同一时基 · 可复算的延迟/波形</td></tr>
+      <tr><td class="t">1:21–1:30</td><td>重复性与恢复</td><td>再跑一次失败/恢复（或连续三次成功），展示不是“一条过”的剪辑。</td><td>连续 N 次 · 成功率/恢复策略</td></tr>
+      <tr><td class="t">1:30–1:36</td><td>指标卡</td><td>只写已经测到的数字；没测的写“待实测”，不要编。</td><td>P50/P99、PWM 频率、循迹成功率</td></tr>
+      <tr><td class="t">1:36–1:42</td><td>END</td><td>END + 成员姓名/队号，无学校、无导师。</td><td>END</td></tr>
+    </tbody>
+  </table>
+
+  <h2>二、现有 33 秒里，哪些能留、哪些必须重拍</h2>
+  <table>
+    <thead><tr><th>原素材</th><th>判断</th><th>处理</th></tr></thead>
+    <tbody>
+      <tr><td>0–18 s 红外避障（俯拍，带“红外避障 视频展示”字样）</td><td><span class="tag red">不建议直接用</span></td><td>竖屏 + 字样已烧进画面 + 地面杂物多。最多裁 3 s 做插入镜头；主片段重拍横屏。</td></tr>
+      <tr><td>17–20 s 空地面/镜头移动</td><td><span class="tag red">删</span></td><td>没有信息量，属于废镜头。</td></tr>
+      <tr><td>20–33 s 手靠近、超声跟随</td><td><span class="tag green">行为可保留</span></td><td>只保留“手靠近—车反应”的动作逻辑；重新横屏拍，带尺和标记，不要只拍手和地面。</td></tr>
+      <tr><td>画面里的旧车/旧洞洞板</td><td><span class="tag red">不能当新系统</span></td><td>如果已经换 FPGA + STM32，必须让新板入镜；拿旧车素材冒充新系统，评委一眼能看出。</td></tr>
+    </tbody>
+  </table>
+
+  <h2>三、补拍清单（按这个顺序拍，半天能完成）</h2>
+  <div class="checklist">
+    <div>A. 标题卡/章节卡素材：白底、红竖线、黑字，拍屏或直接后期做</div>
+    <div>B. 主板俯拍：ACX750 + STM32 + 驱动板，手指出芯片型号</div>
+    <div>C. FPGA 调试画面：Vivado/ILA 或示波器，屏幕文字可读</div>
+    <div>D. STM32 串口画面：命令、状态、速度值，带到板卡</div>
+    <div>E. 传感器特写：五路循迹、红外、超声、编码器各 3 s</div>
+    <div>F. 整车 45° 静态 + 放障碍的全过程</div>
+    <div>G. 红外避障同一机位重复 3 次</div>
+    <div>H. 超声靠近/后退，画面里有尺或刻度</div>
+    <div>I. 循迹直道 + 弯道，完整通过</div>
+    <div>J. 失败/恢复或连续成功 3 次</div>
+    <div>K. END 卡：END + 姓名/队号</div>
+    <div>L. 现场声/BGM：保留电机声，BGM 压到 -20 dB 左右</div>
+  </div>
+
+  <h2>四、拍摄与剪辑的硬指标</h2>
+  <ul>
+    <li><b>画幅</b>：全部重拍为 <b>1920×1080、16:9、30 fps</b>。模板内容区也是 16:9，只是外层加了黑边和字幕条；不要再用 720×1264 竖屏。</li>
+    <li><b>机位</b>：一个固定 45° 全景 + 一个俯拍特写。手机用三脚架/夹子，关闭数码变焦；每个动作前留 2 s 静态，动作后留 1 s。</li>
+    <li><b>背景</b>：白泡沫板/蓝卡纸铺底，清掉桌脚、纸箱、杂物；光线从两侧打，避免车体反光。</li>
+    <li><b>字幕</b>：底部黑条 + 白字，字号在 1080p 下不小于 32 px；每条不超过 18 个汉字；统一使用微软雅黑/思源黑体。</li>
+    <li><b>节奏</b>：章节卡 2–3 s，分块 2–3 s，单个实验 8–12 s；硬切为主，最多保留模板那一次模糊转场。</li>
+    <li><b>声音</b>：模板没有口播。建议保留现场电机声 + 低音量 BGM；如果要加旁白，只讲三句：做了什么、怎么分工、结果如何，不要念技术文档。</li>
+    <li><b>导出</b>：H.264、1080p、30 fps、码率 8–12 Mbps；文件名写“作品名_队号_视频”，不要写学校名。</li>
+  </ul>
+
+  <h2>五、合规检查（上传前逐条打勾）</h2>
+  <div class="checklist">
+    <div>没有学校名称、校徽、学院名、实验室门牌</div>
+    <div>没有指导老师姓名、职称、照片</div>
+    <div>PCB 丝印、衣服、背景板上的校名已避开或打码</div>
+    <div>学生姓名/队号可以保留，且与报名信息一致</div>
+    <div>没有出现与作品无关的人员正脸</div>
+    <div>没有把旧素材冒充新系统、没有伪造实测数据</div>
+  </div>
+
+  <div class="note">
+    <b>最关键的判断：</b>这支片子必须让评委在 30 秒内看到“新系统真的在跑”，而不是只看到一辆车在地上动。
+    所以新 FPGA 板、新接线、ILA/串口证据，至少要有一个清晰镜头；否则模板结构学得再像，也证明不了作品。
+  </div>
+
+  <p class="footer">
+    依据：模板视频 1:42、640×432、24 fps；你的素材 0:33、720×1264、29.5 fps。模板的章节卡与分块结构按实际画面整理，具体比赛时长/画幅以报名页面为准。
+  </p>
+</div>
+</body>
+</html>
